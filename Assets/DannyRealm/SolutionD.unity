@@ -225,8 +225,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mat: {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
-  segments: 30
-  radius: 2
+  segments: 3
+  radius: 1
+  speed: 2
 --- !u!4 &1343845952
 Transform:
   m_ObjectHideFlags: 0
