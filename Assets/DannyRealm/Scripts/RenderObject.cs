@@ -21,6 +21,7 @@ public class RenderObject : CustomTransform {
 	public Vector3 pos2;
 	float moveTimer = 0f;
 	float moveTime = 3f;
+	int direction = 1;
 
 	void Start() {
 		gameObject.AddComponent<MeshRenderer> ();
@@ -53,7 +54,8 @@ public class RenderObject : CustomTransform {
 	}
 
 	void Update() {
-		Translate (Vector3.right * translateSpeed * Time.deltaTime);
+//		Translate (Vector3.right * translateSpeed * Time.deltaTime);
+		BetweenTwoPoints ();
 		Rotate (rotationSpeed * Time.deltaTime);
 
 		DrawShape ();
@@ -81,12 +83,40 @@ public class RenderObject : CustomTransform {
 			tris [i] = i;
 		}
 
+		float p = moveTimer / moveTime;
+
+		Color[] colour = new Color[verts.Length];
+
+		for (int i = 0; i < colour.Length; i++) {
+			colour [i] = new Color (p, p/2, p/3, 1);
+		}
+
 		mesh.vertices = verts;
+
+		mesh.colors = colour;
 
 		mesh.triangles = tris;
 	}
 
 	void BetweenTwoPoints() {
-		
+		moveTimer += direction * Time.deltaTime;
+
+		if (direction > 0 && moveTimer >= moveTime) {
+			direction = -1;
+			moveTimer = moveTime;
+		} else if (direction < 0 && moveTimer <= 0) {
+			direction = 1;
+			moveTimer = 0;
+		}
+
+		float p = moveTimer / moveTime;
+
+		Vector3 newPos = new Vector3 (
+			                 Mathf.Lerp (pos1.x, pos2.x, p),
+			                 Mathf.Lerp (pos1.y, pos2.y, p),
+			                 Mathf.Lerp (pos1.z, pos2.z, p)
+		                 );
+
+		Position = newPos;
 	}
 }
