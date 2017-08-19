@@ -14,7 +14,7 @@ public class RenderObject : CustomTransform {
 
 	[Header("Transformations")]
 	public float translateSpeed = 2f;
-	float rotationSpeed = -Mathf.PI / 2f;
+	public float rotationSpeed = 2f;
 
 	[Header("Task1")]
 	public Vector3 pos1;
@@ -99,7 +99,7 @@ public class RenderObject : CustomTransform {
 	}
 
 	void BetweenTwoPoints() {
-		moveTimer += direction * Time.deltaTime;
+		moveTimer += direction * (Time.deltaTime * translateSpeed);
 
 		if (direction > 0 && moveTimer >= moveTime) {
 			direction = -1;
