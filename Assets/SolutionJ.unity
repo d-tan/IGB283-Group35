@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657826, g: 0.49641263, b: 0.57481676, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
@@ -220,7 +220,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1097780301}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 1.6433914, y: 1.507365, z: -8.668111}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -234,14 +234,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 1097780301}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e0b12a80737de473daa5d626dcdb1844, type: 3}
+  m_Script: {fileID: 11500000, guid: f59158efe5bb0584388ffa468c586c19, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spawnObject: {fileID: 1940580300683294, guid: cf38a8d758c213c4bbe23d037f086298,
-    type: 2}
-  spawnAmount: 7
-  spacing: 3
-  startingPoint: {x: -10, y: 0, z: 0}
+  polygon: {fileID: 1940580300683294, guid: cf38a8d758c213c4bbe23d037f086298, type: 2}
+  number: 5
+  distance: 3
 --- !u!1 &1630571021
 GameObject:
   m_ObjectHideFlags: 0
