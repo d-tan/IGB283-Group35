@@ -14,13 +14,14 @@ public class RenderObject : CustomTransform {
 
 	[Header("Transformations")]
 	public float translateSpeed = 2f;
-	public float rotationSpeed = 2f;
+	[HideInInspector]
+	public float rotationSpeed = -Mathf.PI / 2f;
 
 	[Header("Task1")]
 	public Vector3 pos1;
 	public Vector3 pos2;
 	float moveTimer = 0f;
-	float moveTime = 3f;
+	public float moveTime = 3f;
 	int direction = 1;
 
 	void Start() {
