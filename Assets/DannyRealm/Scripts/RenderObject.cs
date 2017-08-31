@@ -22,8 +22,9 @@ public class RenderObject : CustomTransform {
 	public Vector3 pos1;
 	public Vector3 pos2;
 	int direction = 1;
+	public Vector3 myPos;
 
-	protected void Start() {
+	protected virtual void Start() {
 		gameObject.AddComponent<MeshRenderer> ();
 		gameObject.AddComponent<MeshFilter> ();
 
@@ -50,6 +51,9 @@ public class RenderObject : CustomTransform {
 
 		// Recalculate the bounds for the mesh
 		mesh.RecalculateBounds ();
+
+		// Show publicly the object's position
+		myPos = Position;
 	}
 
 
@@ -70,9 +74,14 @@ public class RenderObject : CustomTransform {
 
 		// Initialise the vertices
 		for (int i = 0; i < verts.Length; i += 3) {
-			verts [i] = new Vector3(0, Position.y, 1f) * scale;
-			verts [i + 1] = new Vector3 (Mathf.Cos (i / 3 * angle), Mathf.Sin (i / 3 * angle) + Position.y, 1f) * scale;
-			verts [i + 2] = new Vector3 (Mathf.Cos (i/3 * angle + angle), Mathf.Sin (i/3 * angle + angle) + Position.y, 1f) * scale;
+			verts [i] = new Vector3(0, 0, 1f) * scale;
+			verts [i + 1] = new Vector3 (Mathf.Cos (i / 3 * angle), Mathf.Sin (i / 3 * angle), 1f) * scale;
+			verts [i + 2] = new Vector3 (Mathf.Cos (i/3 * angle + angle), Mathf.Sin (i/3 * angle + angle), 1f) * scale;
+
+			// Translate position
+			verts [i] += new Vector3 (0, Position.y, 1);
+			verts [i + 1] += new Vector3 (0, Position.y, 1);
+			verts [i + 2] += new Vector3 (0, Position.y, 1);
 		}
 
 		// Set up the triangles
@@ -90,6 +99,8 @@ public class RenderObject : CustomTransform {
 
 		// Set the Triangles for the mesh
 		mesh.triangles = tris;
+
+		mesh.RecalculateBounds ();
 	}
 
 

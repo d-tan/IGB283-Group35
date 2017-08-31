@@ -32,13 +32,17 @@ public class ObjectSpawnerD : MonoBehaviour {
 			renderScript.pos2 += startingPoint + Vector3.right * spacing * i;
 
 
-			handleObject = Instantiate (handle, renderScript.pos1, Quaternion.identity) as GameObject;
+			handleObject = Instantiate (handle, startingPoint + Vector3.right * spacing * i, Quaternion.identity) as GameObject;
 			handleScript = handleObject.GetComponent<HandleObject> ();
 			handleScript.posNum = 1;
+			handleScript.Position = renderScript.pos1;
+			handleScript.follow = renderScript;
 
-			handleObject = Instantiate (handle, renderScript.pos2, Quaternion.identity) as GameObject;
+			handleObject = Instantiate (handle, startingPoint + Vector3.right * spacing * i, Quaternion.identity) as GameObject;
 			handleScript = handleObject.GetComponent<HandleObject> ();
 			handleScript.posNum = 2;
+			handleScript.Position = renderScript.pos2;
+			handleScript.follow = renderScript;
 
 		}
 	}

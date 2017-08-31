@@ -9,30 +9,30 @@ Prefab:
     m_Modifications: []
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
-  m_RootGameObject: {fileID: 1940580300683294}
+  m_RootGameObject: {fileID: 1680699334648860}
   m_IsPrefabParent: 1
---- !u!1 &1940580300683294
+--- !u!1 &1680699334648860
 GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   serializedVersion: 5
   m_Component:
-  - component: {fileID: 4469733299267246}
-  - component: {fileID: 114617018213702730}
+  - component: {fileID: 4368437175351140}
+  - component: {fileID: 114374273034891556}
   m_Layer: 0
-  m_Name: Object
-  m_TagString: Untagged
+  m_Name: Handle
+  m_TagString: Handle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &4469733299267246
+--- !u!4 &4368437175351140
 Transform:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1940580300683294}
+  m_GameObject: {fileID: 1680699334648860}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
@@ -40,22 +40,24 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &114617018213702730
+--- !u!114 &114374273034891556
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1940580300683294}
+  m_GameObject: {fileID: 1680699334648860}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3b5722a9308364b1dbf7339322b94f1e, type: 3}
+  m_Script: {fileID: 11500000, guid: db2b028162c904e959d9283d2161e759, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   mat: {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
-  segments: 30
-  radius: 1
-  translateSpeed: 2
+  segments: 4
+  radius: 0.7
+  translateSpeed: 0
   rotationSpeed: -1.5707964
-  pos1: {x: 0, y: 7, z: 0}
+  pos1: {x: 0, y: 0, z: 0}
   pos2: {x: 0, y: 0, z: 0}
   myPos: {x: 0, y: 0, z: 0}
+  follow: {fileID: 0}
+  posNum: 1

@@ -239,49 +239,43 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   spawnObject: {fileID: 1940580300683294, guid: cf38a8d758c213c4bbe23d037f086298,
     type: 2}
+  handle: {fileID: 1680699334648860, guid: 12f0e1077c0284a53b8a12a4dbe7fddf, type: 2}
   spawnAmount: 4
   spacing: 3
   startingPoint: {x: -10, y: 0, z: 0}
---- !u!1 &1375403004
+--- !u!1 &1365523329
 GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   serializedVersion: 5
   m_Component:
-  - component: {fileID: 1375403006}
-  - component: {fileID: 1375403005}
+  - component: {fileID: 1365523331}
+  - component: {fileID: 1365523330}
   m_Layer: 0
-  m_Name: Handle
+  m_Name: MouseClick
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1375403005
+--- !u!114 &1365523330
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1375403004}
+  m_GameObject: {fileID: 1365523329}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: db2b028162c904e959d9283d2161e759, type: 3}
+  m_Script: {fileID: 11500000, guid: 73a73bbbbb53e4313912b1d348c42332, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mat: {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
-  segments: 3
-  radius: 0.3
-  translateSpeed: 0
-  rotationSpeed: -1.5707964
-  pos1: {x: 0, y: 0, z: 0}
-  pos2: {x: 0, y: 0, z: 0}
---- !u!4 &1375403006
+--- !u!4 &1365523331
 Transform:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1375403004}
+  m_GameObject: {fileID: 1365523329}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
