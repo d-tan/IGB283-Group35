@@ -40,7 +40,7 @@ public class RenderObject : CustomTransform {
 	}
 
 
-	void Update() {
+	protected virtual void Update() {
 		// Perform the movement of this object between the two specified points
 		BetweenTwoPoints ();
 

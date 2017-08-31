@@ -5,6 +5,7 @@ using UnityEngine;
 public class ObjectSpawnerD : MonoBehaviour {
 
 	public GameObject spawnObject;
+	public GameObject handle;
 
 	[Header("Spawn Settings")]
 	public int spawnAmount = 2;
@@ -17,15 +18,28 @@ public class ObjectSpawnerD : MonoBehaviour {
 
 		for (int i = 0; i < spawnAmount; i++) {
 			GameObject spawnedObject;
-			spawnedObject = Instantiate (spawnObject, startingPoint + Vector3.right * spacing * i, transform.rotation) as GameObject;
+			GameObject handleObject;
+			RenderObject renderScript;
+			HandleObject handleScript;
 
-			RenderObject script;
-			script = spawnedObject.GetComponent<RenderObject> ();
-			script.translateSpeed = Random.Range (1.5f, 3.5f);
-			script.rotationSpeed = Random.Range (-Mathf.PI / 2f, Mathf.PI / 2f);
-			script.segments = Random.Range (30, 40);
-			script.pos1 += startingPoint + Vector3.right * spacing * i;
-			script.pos2 += startingPoint + Vector3.right * spacing * i;
+			spawnedObject = Instantiate (spawnObject, startingPoint + Vector3.right * spacing * i, Quaternion.identity) as GameObject;
+
+			renderScript = spawnedObject.GetComponent<RenderObject> ();
+			renderScript.translateSpeed = Random.Range (1.5f, 3.5f);
+			renderScript.rotationSpeed = Random.Range (-Mathf.PI / 2f, Mathf.PI / 2f);
+			renderScript.segments = Random.Range (30, 40);
+			renderScript.pos1 += startingPoint + Vector3.right * spacing * i;
+			renderScript.pos2 += startingPoint + Vector3.right * spacing * i;
+
+
+			handleObject = Instantiate (handle, renderScript.pos1, Quaternion.identity) as GameObject;
+			handleScript = handleObject.GetComponent<HandleObject> ();
+			handleScript.posNum = 1;
+
+			handleObject = Instantiate (handle, renderScript.pos2, Quaternion.identity) as GameObject;
+			handleScript = handleObject.GetComponent<HandleObject> ();
+			handleScript.posNum = 2;
+
 		}
 	}
 }
