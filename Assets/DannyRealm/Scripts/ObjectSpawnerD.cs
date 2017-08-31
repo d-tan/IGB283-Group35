@@ -23,7 +23,7 @@ public class ObjectSpawnerD : MonoBehaviour {
 			script = spawnedObject.GetComponent<RenderObject> ();
 			script.translateSpeed = Random.Range (1.5f, 3.5f);
 			script.rotationSpeed = Random.Range (-Mathf.PI / 2f, Mathf.PI / 2f);
-			script.segments = Random.Range (3, 11);
+			script.segments = Random.Range (30, 40);
 			script.pos1 += startingPoint + Vector3.right * spacing * i;
 			script.pos2 += startingPoint + Vector3.right * spacing * i;
 		}

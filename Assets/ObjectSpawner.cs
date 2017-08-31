@@ -17,7 +17,7 @@ public class ObjectSpawner : MonoBehaviour {
             Vector3 position = new Vector3();
             position.x = i * distance;
             GameObject objectInstance = Instantiate(polygon);
-            RenderObject ro = objectInstance.GetComponent<RenderObject>();
+			RenderObject ro = objectInstance.GetComponent<RenderObject>();
             objectInstance.transform.position = position;
             ro.rotationSpeed += i;
             ro.translateSpeed += i;
