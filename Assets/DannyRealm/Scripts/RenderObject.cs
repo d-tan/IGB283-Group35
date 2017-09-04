@@ -30,8 +30,8 @@ public class RenderObject : CustomTransform {
 	int direction = 1;
 	public Vector3 myPos;
 
-    Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-    RaycastHit hit;
+//    Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+//    RaycastHit hit;
 
 
     protected virtual void Start() {
