@@ -4,9 +4,11 @@ using UnityEngine;
 
 public class HandleObject : RenderObject {
 
+	// Reference to collider
 	Collider2D col;
 	Vector2 colliderOffset;
 
+	// Reference to the object this controls
 	public RenderObject follow;
 	public int posNum = 1;
 
@@ -23,16 +25,22 @@ public class HandleObject : RenderObject {
 		scale = radius;
 		origin = new Vector3(Position.x, 0, 0);
 
+		// Display handle
 		DrawShape ();
+
+		// Add collider 2D
 		gameObject.AddComponent<BoxCollider2D> ();
 		col = GetComponent<Collider2D> ();
+
+		// Set offset
 		colliderOffset = new Vector2(-Position.x, 0);
 	}
 
 	// Update is called once per frame
 	protected override void Update () {
-//		MouseClick ();
 
+		// Set the respective position from the Object's script to this position
+		// with respect to this handle number
 		if (posNum == 1) {
 			follow.pos1 = this.Position;
 
@@ -40,24 +48,29 @@ public class HandleObject : RenderObject {
 			follow.pos2 = this.Position;
 		}
 
+		// Set the colour of this mesh to black
 		SetMeshColours (Color.black);
 
 		myPos = Position;
 	}
 
+	// Set the mesh's colour given a colour
 	protected void SetMeshColours(Color colour) {
-		// Set colours depending on their position
+		
 		Color[] colours = new Color[mesh.vertices.Length];
 
+		// Add the colour specified
 		for (int i = 0; i < colours.Length; i++) {
 			colours [i] = colour;
 		}
 
+		// Set the colours
 		mesh.colors = colours;
 	}
 
+	// Translate this object's position to the specified position
 	public void DragObject(Vector2 mousePos) {
-		mesh.vertices = Translate (mousePos - (Vector2)Position, mesh);
-		col.offset = colliderOffset + mousePos;
+		mesh.vertices = Translate (mousePos - (Vector2)Position, mesh); // translate the mesh
+		col.offset = colliderOffset + mousePos; // translate the collider
 	}
 }

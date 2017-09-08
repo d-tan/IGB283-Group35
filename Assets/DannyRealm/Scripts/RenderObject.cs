@@ -4,21 +4,22 @@ using UnityEngine;
 
 public class RenderObject : IGB283Transform {
 
+	// Reference for mesh
 	protected Mesh mesh;
 	public Material mat;
 
 	[Header("Shape")]
-	public int segments = 3;
+	public int segments = 3; // Number of segments to draw
 	protected const int minSegments = 3; // the minimum number of segments allowable
 	public float radius = 1f; // the radius of the shape
 
 	[Header("Transformations")]
-    public float step = 2f;
+    public float step = 2f; // number to increase/decrease by
     public float translateSpeed = 2f;
     public float maxTranslateSpeed = 10f;
     public float rotationSpeed = 2f;
     public float maxRotationSpeed = 8f;
-    public Color color1;
+    public Color color1; // Colours to lerp between
     public Color color2;
 	[HideInInspector]
 	//public float rotationSpeed = -Mathf.PI / 2f;
@@ -128,14 +129,18 @@ public class RenderObject : IGB283Transform {
 		// Set colours depending on their position
 		Color[] colour = new Color[mesh.vertices.Length];
 
+		// Add colours
 		for (int i = 0; i < colour.Length; i++) {
             colour[i] = Color.Lerp(color1, color2, p);
 		}
 
+		// Hard set the first triangle to blue
+		// This is to be able to see if the object is rotating, since our objects look circular
 		colour [0] = Color.blue;
 		colour [1] = Color.blue;
 		colour [2] = Color.blue;
 
+		// Set colours
 		mesh.colors = colour;
 	}
 
@@ -172,10 +177,13 @@ public class RenderObject : IGB283Transform {
 
         // Check if our position has passed the point we are moving towards
         if (Vector3.Distance(v2, v1) <= Vector3.Distance(Position, v2)) {
+			
+			// Move the mesh back to v1 (the point we're moving towards
 			mesh.vertices = TranslateRotate (rotationSpeed * Time.deltaTime, (Vector2)(v1 - Position), mesh, origin);
-			direction = dir;
+			direction = dir; // change direction
 		}
 
+		// Draw lines from both positions to the current position of the object
 		Debug.DrawLine (v1, Position, Color.green);
 		Debug.DrawLine (v2, Position, Color.red);
 	}
@@ -185,26 +193,33 @@ public class RenderObject : IGB283Transform {
     /// </summary>
     void OnMouseOver()
     {
+		// Mouse left click
         if (Input.GetMouseButtonDown(0))
         {
-            if (translateSpeed < maxTranslateSpeed) translateSpeed += step;
-            if (rotationSpeed < maxRotationSpeed) rotationSpeed += step;
-            
-        }
-        else if (Input.GetMouseButtonDown(1))
-        {
+			// increase translation speed if maximum has not been reached
+            if (translateSpeed < maxTranslateSpeed) 
+				translateSpeed += step;
+
+			// increase rotation speed if maximum has not been reached
+            if (rotationSpeed < maxRotationSpeed) 
+				rotationSpeed += step;
+        
+		// Mouse right click
+        } else if (Input.GetMouseButtonDown(1)) {
+
+			// decrease translation speed, but check if speed is less than step
             if (translateSpeed < step)
-            {
                 translateSpeed = 0;
-            }
             else
-            {
                 translateSpeed -= step;
-            }
-            if (rotationSpeed > -maxRotationSpeed) rotationSpeed -= step;
-        }
-        else if (Input.GetMouseButtonDown(2))
-        {
+
+			// decrease rotation speed if it is greater than the -max
+            if (rotationSpeed > -maxRotationSpeed) 
+				rotationSpeed -= step;
+
+		// Mouse middle click
+        } else if (Input.GetMouseButtonDown(2)) {
+			// Randomise Translation and Rotaion speeds
             translateSpeed = Random.Range(0, maxTranslateSpeed);
             rotationSpeed = Random.Range(-maxRotationSpeed, maxRotationSpeed);
         }
