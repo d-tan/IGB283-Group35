@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class RenderObject : CustomTransform {
+public class RenderObject : IGB283Transform {
 
 	protected Mesh mesh;
 	public Material mat;
@@ -25,13 +25,10 @@ public class RenderObject : CustomTransform {
 	protected Vector3 origin;
 
     [Header("Task1")]
-	public Vector3 pos1;
-	public Vector3 pos2;
-	int direction = 1;
-	public Vector3 myPos;
-
-//    Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-//    RaycastHit hit;
+	public Vector3 pos1; // The starting position
+	public Vector3 pos2; // The end position
+	int direction = 1; // Direction the object is travelling (1 is towards pos2, -1 is towards pos1)
+	public Vector3 myPos; // The current position of this object for reference
 
 
     protected virtual void Start() {
@@ -159,7 +156,7 @@ public class RenderObject : CustomTransform {
 		// Draw lines to visualise the positions
 		Debug.DrawLine (pos1, pos1 + Vector3.right);
 		Debug.DrawLine (pos2, pos2 + Vector3.right);
-		Debug.DrawLine (pos1, Position);
+
 	}
 
 
@@ -171,13 +168,16 @@ public class RenderObject : CustomTransform {
 	/// <param name="dir">Direction to change when point is reached.</param>
 	void DoDirectionalTransformation(Vector3 v1, Vector3 v2, int dir) {
 		// Translate and Rotate the mesh
-		mesh.vertices = TranslateRotate (rotationSpeed * Time.deltaTime, (Vector2)(v1 - Position).normalized * Time.deltaTime * translateSpeed, mesh, origin);
+		mesh.vertices = TranslateRotate (rotationSpeed * Time.deltaTime, ((Vector2)(v1 - Position)).normalized * Time.deltaTime * translateSpeed, mesh, origin);
 
         // Check if our position has passed the point we are moving towards
         if (Vector3.Distance(v2, v1) <= Vector3.Distance(Position, v2)) {
 			mesh.vertices = TranslateRotate (rotationSpeed * Time.deltaTime, (Vector2)(v1 - Position), mesh, origin);
 			direction = dir;
 		}
+
+		Debug.DrawLine (v1, Position, Color.green);
+		Debug.DrawLine (v2, Position, Color.red);
 	}
 
     /// <summary>

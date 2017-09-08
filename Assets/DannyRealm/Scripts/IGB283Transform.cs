@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class CustomTransform : MonoBehaviour {
+public abstract class IGB283Transform : MonoBehaviour {
 
 	public Vector3 Position { get; set; }
 	public float rotation { get; set; }
