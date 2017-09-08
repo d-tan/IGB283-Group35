@@ -13,18 +13,28 @@ public class RenderObject : CustomTransform {
 	public float radius = 1f; // the radius of the shape
 
 	[Header("Transformations")]
-	public float translateSpeed = 2f;
+    public float step = 2f;
+    public float translateSpeed = 2f;
+    public float maxTranslateSpeed = 10f;
+    public float rotationSpeed = 2f;
+    public float maxRotationSpeed = 8f;
+    public Color color1;
+    public Color color2;
 	[HideInInspector]
-	public float rotationSpeed = -Mathf.PI / 2f;
+	//public float rotationSpeed = -Mathf.PI / 2f;
 	protected Vector3 origin;
 
-	[Header("Task1")]
+    [Header("Task1")]
 	public Vector3 pos1;
 	public Vector3 pos2;
 	int direction = 1;
 	public Vector3 myPos;
 
-	protected virtual void Start() {
+//    Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+//    RaycastHit hit;
+
+
+    protected virtual void Start() {
 		gameObject.AddComponent<MeshRenderer> ();
 		gameObject.AddComponent<MeshFilter> ();
 
@@ -38,6 +48,10 @@ public class RenderObject : CustomTransform {
 		origin = new Vector3(pos1.x, 0, 0);
 
 		DrawShape ();
+
+        // set the collider radius
+        GetComponent<CircleCollider2D>().radius = scale;
+
 	}
 
 
@@ -48,12 +62,14 @@ public class RenderObject : CustomTransform {
 		// Re-set the colours for the mesh
 		SetMeshColours ();
 
-
 		// Recalculate the bounds for the mesh
 		mesh.RecalculateBounds ();
 
 		// Show publicly the object's position
 		myPos = Position;
+
+        // Speed up and down the translate speed of all object using keyboard input
+        GetComponent<CircleCollider2D>().offset = new Vector3(myPos.x - origin.x, myPos.y);
 	}
 
 
@@ -116,12 +132,12 @@ public class RenderObject : CustomTransform {
 		Color[] colour = new Color[mesh.vertices.Length];
 
 		for (int i = 0; i < colour.Length; i++) {
-			colour [i] = new Color (p, p/2, p/3, 1);
+            colour[i] = Color.Lerp(color1, color2, p);
 		}
 
 		colour [0] = Color.blue;
 		colour [1] = Color.blue;
-		colour [3] = Color.blue;
+		colour [2] = Color.blue;
 
 		mesh.colors = colour;
 	}
@@ -157,10 +173,40 @@ public class RenderObject : CustomTransform {
 		// Translate and Rotate the mesh
 		mesh.vertices = TranslateRotate (rotationSpeed * Time.deltaTime, (Vector2)(v1 - Position).normalized * Time.deltaTime * translateSpeed, mesh, origin);
 
-		// Check if our position has passed the point we are moving towards
-		if (Vector3.Distance(v2, v1) <= Vector3.Distance(Position, v2)) {
+        // Check if our position has passed the point we are moving towards
+        if (Vector3.Distance(v2, v1) <= Vector3.Distance(Position, v2)) {
 			mesh.vertices = TranslateRotate (rotationSpeed * Time.deltaTime, (Vector2)(v1 - Position), mesh, origin);
 			direction = dir;
 		}
 	}
+
+    /// <summary>
+    /// Speed up and down the translations.
+    /// </summary>
+    void OnMouseOver()
+    {
+        if (Input.GetMouseButtonDown(0))
+        {
+            if (translateSpeed < maxTranslateSpeed) translateSpeed += step;
+            if (rotationSpeed < maxRotationSpeed) rotationSpeed += step;
+            
+        }
+        else if (Input.GetMouseButtonDown(1))
+        {
+            if (translateSpeed < step)
+            {
+                translateSpeed = 0;
+            }
+            else
+            {
+                translateSpeed -= step;
+            }
+            if (rotationSpeed > -maxRotationSpeed) rotationSpeed -= step;
+        }
+        else if (Input.GetMouseButtonDown(2))
+        {
+            translateSpeed = Random.Range(0, maxTranslateSpeed);
+            rotationSpeed = Random.Range(-maxRotationSpeed, maxRotationSpeed);
+        }
+    }
 }
