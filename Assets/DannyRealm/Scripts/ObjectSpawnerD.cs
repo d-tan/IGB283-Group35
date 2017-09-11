@@ -36,6 +36,9 @@ public class ObjectSpawnerD : MonoBehaviour {
 
 			// Set varliables
 			renderScript = spawnedObject.GetComponent<RenderObject> ();
+            if (renderScript.translateSpeed > renderScript.maxTranslateSpeed) renderScript.translateSpeed = Random.Range(randomTranslateSpeedMin, randomTranslateSpeedMax); // Randomise translation speed when the speed is set to more than its max
+            if (renderScript.rotationSpeed > renderScript.maxRotationSpeed) renderScript.rotationSpeed = Random.Range(randomRotationSpeedMin, randomRotationSpeedMax); // Randomise rotation speed when the speed is set to more than its max
+            if (renderScript.segments == 0) renderScript.segments = Random.Range(randomSegmentMin, randomSegmentMax); // Randomise number of segments when the number is set to 0
 			renderScript.pos1 += startingPoint + Vector3.right * spacing * i; // Set positions to translate between
 			renderScript.pos2 += startingPoint + Vector3.right * spacing * i;
 
