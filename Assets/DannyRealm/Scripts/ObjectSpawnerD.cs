@@ -12,9 +12,15 @@ public class ObjectSpawnerD : MonoBehaviour {
 	public int spawnAmount = 2; // Number of objects to spawn
 	public float spacing = 2f; // Spacing between each object
 	public Vector3 startingPoint; // The starting point in which to start spawning our objects at
+    public int randomSegmentMin = 30;
+    public int randomSegmentMax = 40;
+    public float randomTranslateSpeedMin = 1.5f;
+    public float randomTranslateSpeedMax = 3.5f;
+    public float randomRotationSpeedMin = -Mathf.PI / 2f;
+    public float randomRotationSpeedMax = Mathf.PI / 2f;
 
-	// Use this for initialization
-	void Start () {
+    // Use this for initialization
+    void Start () {
 		
 
 		for (int i = 0; i < spawnAmount; i++) {
@@ -30,9 +36,6 @@ public class ObjectSpawnerD : MonoBehaviour {
 
 			// Set varliables
 			renderScript = spawnedObject.GetComponent<RenderObject> ();
-			renderScript.translateSpeed = Random.Range (1.5f, 3.5f); // Randomise translation speed
-			renderScript.rotationSpeed = Random.Range (-Mathf.PI / 2f, Mathf.PI / 2f); // Randomise rotation speed
-			renderScript.segments = Random.Range (30, 40); // Randomise number of segments
 			renderScript.pos1 += startingPoint + Vector3.right * spacing * i; // Set positions to translate between
 			renderScript.pos2 += startingPoint + Vector3.right * spacing * i;
 

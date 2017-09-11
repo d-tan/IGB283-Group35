@@ -68,13 +68,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mat: {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
-  segments: 30
+  segments: 0
   radius: 1
-  step: 3
-  translateSpeed: 2
-  maxTranslateSpeed: 10
-  rotationSpeed: -1.5707964
-  maxRotationSpeed: 8
+  step: 2
+  translateSpeed: 6
+  maxTranslateSpeed: 5
+  rotationSpeed: 6
+  maxRotationSpeed: 5
   color1: {r: 1, g: 0, b: 0, a: 1}
   color2: {r: 0, g: 1, b: 0.08965492, a: 1}
   pos1: {x: 0, y: 7, z: 0}

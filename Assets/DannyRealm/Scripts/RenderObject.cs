@@ -9,15 +9,15 @@ public class RenderObject : IGB283Transform {
 	public Material mat;
 
 	[Header("Shape")]
-	public int segments = 3; // Number of segments to draw
-	protected const int minSegments = 3; // the minimum number of segments allowable
+	public int segments = 3; // Number of segments to draw & When its 0, ObjectSpawn.cs Script will overide with a randomised number
+    protected const int minSegments = 3; // the minimum number of segments allowable
 	public float radius = 1f; // the radius of the shape
 
 	[Header("Transformations")]
     public float step = 2f; // number to increase/decrease by
-    public float translateSpeed = 2f;
+    public float translateSpeed = 2f; // when its bigger than max, ObjectSpawn.cs Script will overide with a randomised number
     public float maxTranslateSpeed = 10f;
-    public float rotationSpeed = 2f;
+    public float rotationSpeed = 2f; // when its bigger than max, ObjectSpawn.cs Script will overide with a randomised number
     public float maxRotationSpeed = 8f;
     public Color color1; // Colours to lerp between
     public Color color2;
